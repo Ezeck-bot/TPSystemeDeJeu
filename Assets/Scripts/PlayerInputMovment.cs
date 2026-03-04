@@ -6,7 +6,7 @@ public class PlayerInputMovment : MonoBehaviour
     [Header("Reference")]
     [SerializeField] private PlayerMovment m_playerMovment;
     
-    private bool m_IsNear = false;
+    //private bool m_IsNear = false;
     private Vector2 m_moveInput;
     private GameObject m_GameObject;
 
@@ -42,27 +42,29 @@ public class PlayerInputMovment : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        m_IsNear = true;
+        //m_IsNear = true;
         Debug.Log("OnTrigger");
         m_GameObject = other.gameObject;
+        DialogueManager m_dialogueManager = m_GameObject.GetComponent<DialogueManager>();
+        m_dialogueManager.StartDialogue();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        m_IsNear = false;
+        //m_IsNear = false;
         Debug.Log("OnExit");
     }
 
-    public void OnInteract(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            if (m_IsNear)
-            {
-                DialogueManager m_dialogueManager = m_GameObject.GetComponent<DialogueManager>();
-                m_dialogueManager.StartDialogue();
-            }
+    //public void OnInteract(InputAction.CallbackContext context)
+    //{
+    //    if (context.performed)
+    //    {
+    //        if (m_IsNear)
+    //        {
+    //            DialogueManager m_dialogueManager = m_GameObject.GetComponent<DialogueManager>();
+    //            m_dialogueManager.StartDialogue();
+    //        }
 
-        }
-    }
+    //    }
+    //}
 }
