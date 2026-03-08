@@ -65,7 +65,7 @@ public class Items : MonoBehaviour
                 }
 
                 //Experience
-                m_experience.SetExp(m_addExperience);
+                m_experience.SetExp(m_experience.GetExp() + m_addExperience);
             }
         }
 

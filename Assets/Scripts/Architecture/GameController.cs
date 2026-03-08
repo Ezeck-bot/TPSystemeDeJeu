@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+
     public DialogueController m_dialogueController { get; private set; }
 
     public EnemyController m_enemyController { get; private set; }
@@ -20,39 +21,58 @@ public class GameController : MonoBehaviour
 
     public PlayerController m_playerController { get; private set; }
 
+    public PlayerInputController m_playerInputController { get; private set; }
+
+    [SerializeField] private PlayerTriggerItem m_playerTriggerItemRef;
+    public PlayerTriggerItem m_playerTriggerItem { get; private set; }
+
     public void Awake()
     {
         //seul le game controller a un awake
 
-        m_dialogueController = GetComponent<DialogueController>();
+        m_dialogueController = GetComponentInChildren<DialogueController>();
 
-        m_enemyController = GetComponent<EnemyController>();
+        m_enemyController = GetComponentInChildren<EnemyController>();
 
-        m_experienceController = GetComponent<ExperienceController>();
+        m_experienceController = GetComponentInChildren<ExperienceController>();
 
-        m_hpController = GetComponent<HpController>();
+        m_hpController = GetComponentInChildren<HpController>();
 
-        m_hudController = GetComponent<HudController>();
+        m_hudController = GetComponentInChildren<HudController>();
 
-        m_hungerController = GetComponent<HungerController>();
+        m_hungerController = GetComponentInChildren<HungerController>();
 
-        m_itemsController = GetComponent<ItemsController>();
+        m_itemsController = GetComponentInChildren<ItemsController>();
 
-        m_npcController = GetComponent<NpcController>();
+        m_npcController = GetComponentInChildren<NpcController>();
 
-        m_playerController = GetComponent<PlayerController>();
+        m_playerController = GetComponentInChildren<PlayerController>();
+
+        m_playerInputController = GetComponentInChildren<PlayerInputController>();
+
+        m_playerTriggerItem = m_playerTriggerItemRef;
+
 
         SetDependencies();
+
+        StartCoroutine(m_hungerController.IncrementHunger());
     }
 
     public void SetDependencies()
     {
         m_hungerController.SetDependencies(this);
-        m_hpController.SetDependecies(this);
+
+        m_hpController.SetDependencies(this);
         m_experienceController.SetDependencies(this);
-        m_playerController.SetDependencies(this);
         m_hudController.SetDependencies(this);
+
         m_itemsController.SetDependencies(this);
+
+        m_playerController.SetDependencies(m_playerInputController);
+
+        //faire disparaître le curseur
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void InitControllers()

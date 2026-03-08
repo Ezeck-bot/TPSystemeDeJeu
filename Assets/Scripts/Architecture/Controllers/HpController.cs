@@ -1,43 +1,88 @@
-using System;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class HpController : MonoBehaviour
 {
     public Action<int> m_onHpChange;
+    public Action<bool> m_onDied;
 
     private ItemsController m_itemController;
     private ExperienceController m_experienceController;
-    //quand un item est rammass� et quand on a level up
+    //quand un item est rammassé et quand on a level up
 
-    public void SetDependecies(GameController gameController)
+    [SerializeField] private float m_LifeTimeSpeed;
+    [SerializeField] private int m_life;
+
+    private Coroutine m_losingHpCoroutine;
+
+    public void SetDependencies(GameController gameController)
     {
         m_itemController = gameController.m_itemsController;
         m_itemController.m_onHpGained += CompileHp;
 
         m_experienceController = gameController.m_experienceController;
         m_experienceController.m_onLevelUp += IncrementMaxHp;
+
+        
     }
 
     public void OnDestroy()
     {
         m_itemController.m_onHpGained -= CompileHp;
         m_experienceController.m_onLevelUp -= IncrementMaxHp;
+
+        
+    }
+
+    public void StartLosingHp()
+    {
+        if (m_losingHpCoroutine == null)
+        {
+            m_losingHpCoroutine = StartCoroutine(LosingHpRoutine());
+        }
+    }
+
+    public void StopLosingHp()
+    {
+        if (m_losingHpCoroutine != null)
+        {
+            StopCoroutine(m_losingHpCoroutine);
+            m_losingHpCoroutine = null;
+        }
     }
 
     public void IncrementMaxHp(int level)
     {
-        // + 10 max hp
+        CompileHp(+10);
     }
 
     public void CompileHp(int amout)
     {
         //toute la compilation des hp se passe ici
+
         //calculer les nouveaux hp
-        m_onHpChange?.Invoke(amout); //publier
+        m_life += amout;
+        m_life = Mathf.Clamp(m_life, 0, 130);
+        m_onHpChange?.Invoke(m_life); //publier
     }
 
-    public void StartLosingHp()
+    public IEnumerator LosingHpRoutine()
     {
+        while (true)
+        {
+            yield return new WaitForSeconds(m_LifeTimeSpeed);
+            CompileHp(-10); 
 
+            if (m_life <= 0)
+            {
+                Debug.Log("You Die");
+                m_onDied?.Invoke(true);
+                yield break;
+            }
+        }
     }
+
+
+    
 }
