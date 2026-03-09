@@ -18,11 +18,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject m_player;
 
+    [SerializeField] private Animator m_animator;
+
     private bool m_isGround = true;
 
     //inventory
 
-    [SerializeField] private Animator m_animator;
 
     private PlayerInputController m_input;
 

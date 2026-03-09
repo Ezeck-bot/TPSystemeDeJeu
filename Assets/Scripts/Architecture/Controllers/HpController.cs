@@ -14,6 +14,8 @@ public class HpController : MonoBehaviour
     [SerializeField] private float m_LifeTimeSpeed;
     [SerializeField] private int m_life;
 
+    private PlayerTriggerItem m_playerTriggerItem;
+
     private Coroutine m_losingHpCoroutine;
 
     public void SetDependencies(GameController gameController)
@@ -24,7 +26,11 @@ public class HpController : MonoBehaviour
         m_experienceController = gameController.m_experienceController;
         m_experienceController.m_onLevelUp += IncrementMaxHp;
 
-        
+        m_playerTriggerItem = gameController.m_playerTriggerItem;
+        m_playerTriggerItem.m_onItemLostLife += DecrementMaxHp;
+
+
+
     }
 
     public void OnDestroy()
@@ -32,7 +38,7 @@ public class HpController : MonoBehaviour
         m_itemController.m_onHpGained -= CompileHp;
         m_experienceController.m_onLevelUp -= IncrementMaxHp;
 
-        
+        m_playerTriggerItem.m_onItemLostLife -= DecrementMaxHp;
     }
 
     public void StartLosingHp()
@@ -52,9 +58,14 @@ public class HpController : MonoBehaviour
         }
     }
 
-    public void IncrementMaxHp(int level)
+    public void IncrementMaxHp(int life)
     {
         CompileHp(+10);
+    }
+
+    public void DecrementMaxHp(int life)
+    {
+        CompileHp(-life);
     }
 
     public void CompileHp(int amout)
