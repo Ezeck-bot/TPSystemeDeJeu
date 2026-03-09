@@ -17,6 +17,10 @@ public class DialogueManager : MonoBehaviour
     {
         m_gameHUD.NewDialogue(this);
     }
+    public void CloseDialogue()
+    {
+        m_gameHUD.EndDialogue();
+    }
 
     public void Answer(bool option)
     {

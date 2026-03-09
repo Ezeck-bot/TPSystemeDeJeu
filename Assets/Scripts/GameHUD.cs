@@ -38,8 +38,8 @@ public class GameHUD : MonoBehaviour
             m_button1Text.text = dialogueInfo.button1;
             m_button1.onClick.AddListener(delegate { dialogueInfo.Answer(true); });
 
-            m_button1Text.text = dialogueInfo.button2;
-            m_button1.onClick.AddListener(delegate { dialogueInfo.Answer(false); });
+            m_button2Text.text = dialogueInfo.button2;
+            m_button2.onClick.AddListener(delegate { dialogueInfo.Answer(false); });
         }
         else
         {
@@ -52,7 +52,7 @@ public class GameHUD : MonoBehaviour
 
     }
 
-    private void EndDialogue()
+    public void EndDialogue()
     {
         m_dialogue.SetActive(false);
     }

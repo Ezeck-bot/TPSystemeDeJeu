@@ -52,6 +52,8 @@ public class PlayerInputMovment : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         //m_IsNear = false;
+        DialogueManager m_dialogueManager = m_GameObject.GetComponent<DialogueManager>();
+        m_dialogueManager.CloseDialogue();
         Debug.Log("OnExit");
     }
 
