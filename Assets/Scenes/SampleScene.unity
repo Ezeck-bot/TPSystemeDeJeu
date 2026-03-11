@@ -288,6 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_decreaseHunger: 40
   m_addExperience: 1
+  m_lostLife: 0
 --- !u!1 &100863552
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_decreaseHunger: 0
   m_addExperience: 1
+  m_lostLife: 0
 --- !u!135 &175560376
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -645,6 +647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_decreaseHunger: 0
   m_addExperience: 1
+  m_lostLife: 0
 --- !u!135 &255586846
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1177,6 +1180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_decreaseHunger: 0
   m_addExperience: 1
+  m_lostLife: 0
 --- !u!1 &618123569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1428,6 +1432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_decreaseHunger: 0
   m_addExperience: 1
+  m_lostLife: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1843,6 +1848,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_decreaseHunger: 0
   m_addExperience: 1
+  m_lostLife: 0
 --- !u!135 &1151363588
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2277,6 +2283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_decreaseHunger: 20
   m_addExperience: 0
+  m_lostLife: 0
 --- !u!1 &1392762089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2400,6 +2407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_decreaseHunger: 0
   m_addExperience: 1
+  m_lostLife: 0
 --- !u!95 &1424342915
 Animator:
   serializedVersion: 7
@@ -2545,6 +2553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_decreaseHunger: 30
   m_addExperience: 0
+  m_lostLife: 0
 --- !u!1 &1475842275
 GameObject:
   m_ObjectHideFlags: 0
